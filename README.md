@@ -4,14 +4,20 @@ This is Animikii's Rails Testing Guide.
 
 ## Table of Contents
   1. [Introduction](#introduction)
+      1. [What Kind of Projects We Test](#what-kind-of-projects-we-test)
+      1. [What Kind of Projects We Don't Test](#what-kind-of-projects-we-dont-test)
+      1. [Strategy](#strategy)
 
-  1. [Resources](#resources)
-      1. [Example Projects Tests](#example-projects-tests)
-      1. [Other](#other)
+  1. [Tools](#tools)
+  1. [What We Test](#what-we-test)
+      1. [Business Logic](#business-logic)
+      1. [Scopes](#scopes)
+      1. [Access Control](#access-control)
+      1. [Critical User Workflows](#critical-user-workflows)
 
 
 ## Introduction
-This guide is a early draft based on feedback given by our engineering staff as of November 2020.
+This guide is an early draft based on feedback given by our engineering staff as of November 2020.
 
 <!-- This need to be confirmed by leadership / engineering leadership -->
 ### What Kind of Projects We Test
@@ -26,18 +32,23 @@ This guide is a early draft based on feedback given by our engineering staff as 
 ### Strategy
 The high level strategy is to test the complicated logic and to not test standard rails implementation. Judgement should be used by the application maintainers as to what they see as important to test.
 
-Part of this strategy includes encapsulating a rail app's business logic in some sort of service object to make testing easier.
+Part of this strategy includes encapsulating a application's business logic in some sort of service object to make testing easier.
 
 ## Tools
 `minitest` over `rspec`. Minitest is the default test framework, has a smaller learning curve, and is faster.
 
 `fixtures` or `factories` for test data. There is no hard rule on this one. Fixtures are Rails’ default way to prepare and reuse test data. However, opinions on which to use in the industry are mixed. AKII has used both in past projects.
 
-https://semaphoreci.com/community/tutorials/working-effectively-with-data-factories-using-factorygirl
+`selenium` for browser automation.
+`cypress` (maybe) for automated browser testing.
+
+### Resources
+[Working Effectively with Factories](https://semaphoreci.com/community/tutorials/working-effectively-with-data-factories-using-factorygirl)  
+
 
 ## What We Test
 ### Business Logic
-Business Logic should generally always be tested. Ideally located in service objects, however, if such logic lives elsewhere is should be tested. The definition of business logic is "part of the program that encodes the real-world business rules that determine how data can be created, stored, and changed".
+Business Logic should generally always be tested. Ideally located in service objects, however, if such logic lives elsewhere it should still be tested. The definition of business logic is "part of the program that encodes the real-world business rules that determine how data can be created, stored, and changed".
 
 ### Scopes
 Simple scopes do not need to be tested. However, if a scope's complexity starts to get confusing we should test it.
@@ -46,21 +57,22 @@ Simple scopes do not need to be tested. However, if a scope's complexity starts 
 Access control points should be tested.
 
 ### Critical User Workflows
-While feature tests are typically slow. Good practice would be to write a couple feature tests to test the most critical user workflows. Such as 
+While feature tests are typically slow. Good practice would be to write a couple feature tests to test the most critical user workflows. Such as user signup or 
 
-## Resources
+## General Resources
 
-### Example Projects Tests
-
-https://github.com/animikii/phsa-sanyas-upgrade/tree/master/test
-https://github.com/animikii/yikesite-web/tree/master/test
-https://github.com/animikii/niiwin-mvp/tree/master/test
-https://github.com/animikii/ahslovit-web/tree/master/test
+### Example of Testing in our existing Projects
+[San'yas Next](https://github.com/animikii/phsa-sanyas-upgrade/tree/master/test)  
+[Yikesite](https://github.com/animikii/yikesite-web/tree/master/test)  
+[Niiwin](https://github.com/animikii/niiwin-mvp/tree/master/test)  
+[AHS Lovit](https://github.com/animikii/ahslovit-web/tree/master/test)  
 
 
 ### Other
-https://guides.rubyonrails.org/testing.html
-https://github.com/seattlerb/minitest
-https://thoughtbot.com/blog/how-we-test-rails-applications
-https://www.youtube.com/watch?v=URSWYvyc42M
-https://www.youtube.com/watch?v=l-ZNxvFo4lw
+[Rails Testing Documentation](https://guides.rubyonrails.org/testing.html) Official testing guide from the rails core team. Good documentation of minitest and rails specific test methods.  
+[How We Test Rails Applications](https://thoughtbot.com/blog/how-we-test-rails-applications) By thoughtbot. While they use a different stack for testing the article contains some good information on how to test.   
+[The Magic Tricks of Testing](https://www.youtube.com/watch?v=URSWYvyc42M) A YouTube video from Sandi Metz on what to test, and how to make refactoring less painful.  
+[Minitest 6: test feistier! by Ryan Davis](https://www.youtube.com/watch?v=l-ZNxvFo4lw) A video on the background and advantages of MiniTest by the founder of Minitest.
+
+
+
