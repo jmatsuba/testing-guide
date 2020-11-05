@@ -57,7 +57,7 @@ Simple scopes do not need to be tested. However, if a scope's complexity starts 
 Access control points should be tested.
 
 ### Critical User Workflows
-While feature tests are typically slow. Good practice would be to write a couple feature tests to test the most critical user workflows. Such as user signup or 
+While feature tests are typically slow. Good practice would be to write a couple feature tests to test the most critical user workflows. Such as user signup or one or two of the main features of the application.
 
 ## General Resources
 
